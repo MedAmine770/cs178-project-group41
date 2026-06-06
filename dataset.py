@@ -2,19 +2,23 @@ import gzip
 import idx2numpy
 import numpy as np
 from sklearn.model_selection import train_test_split
+import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
 
 def load_fashion_mnist():
-    with gzip.open("data/train-images-idx3-ubyte.gz", "rb") as f:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    with gzip.open(os.path.join(DATA_DIR, "train-images-idx3-ubyte.gz"), "rb") as f:
         X_train = idx2numpy.convert_from_file(f)
 
-    with gzip.open("data/train-labels-idx1-ubyte.gz", "rb") as f:
+    with gzip.open(os.path.join(DATA_DIR, "train-labels-idx1-ubyte.gz"), "rb") as f:
         y_train = idx2numpy.convert_from_file(f)
 
-    with gzip.open("data/t10k-images-idx3-ubyte.gz", "rb") as f:
+    with gzip.open(os.path.join(DATA_DIR, "t10k-images-idx3-ubyte.gz"), "rb") as f:
         X_test = idx2numpy.convert_from_file(f)
 
-    with gzip.open("data/t10k-labels-idx1-ubyte.gz", "rb") as f:
+    with gzip.open(os.path.join(DATA_DIR, "t10k-labels-idx1-ubyte.gz"), "rb") as f:
         y_test = idx2numpy.convert_from_file(f)
 
     X_train = X_train / 255.0
